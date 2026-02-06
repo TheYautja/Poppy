@@ -16,6 +16,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
+    <exec.mainClass>com.poppy.App</exec.mainClass>
   </properties>
 
   <dependencyManagement>
@@ -48,6 +49,12 @@
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>12.0.2</version>
+	</dependency>
+	
+	<dependency>
+      <groupId>org.jetbrains.pty4j</groupId>
+      <artifactId>pty4j</artifactId>
+      <version>0.13.12</version>
 	</dependency>
 	
   </dependencies>
