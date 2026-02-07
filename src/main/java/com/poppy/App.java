@@ -1,11 +1,21 @@
 package com.poppy;
 
-/**
- * Hello world!
- */
+import java.io.IOException;
+
 public class App {
     public static void main(String[] args) {
-		PTY pty = new PTY();
-        System.out.println("Hello World!");
+		try {
+			PTY pty = new PTY();
+			PtyOutput out = new PtyOutput(pty.getOS());
+			PtyInput in = new PtyInput(pty.getIS());
+			
+			new Thread(in).start();
+			new Thread(out).start();
+			
+		} catch(IOException e){
+			System.out.println("Hello poppy!");
+		}
+	
+        
     }
 }

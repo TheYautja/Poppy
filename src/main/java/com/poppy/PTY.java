@@ -8,37 +8,33 @@ import java.io.OutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.Scanner;
+import java.io.IOException;
 
 
-class PTY implements Runnable {
+class PTY {
 	
-	public PTY(){
-		run();
-	}
+	InputStream is;
+	OutputStream os;
+	PtyProcess process;
 	
-	public void run(){
+	public PTY() throws IOException {
 				
 		String[] cmd = { "/bin/sh", "-l" };
 		Map<String, String> env = new HashMap<>(System.getenv());
 		if (!env.containsKey("TERM")) env.put("TERM", "xterm");
-		PtyProcess process = new PtyProcessBuilder().setCommand(cmd).setEnvironment(env).start();
+		process = new PtyProcessBuilder().setCommand(cmd).setEnvironment(env).start();
 
-		OutputStream os = process.getOutputStream();
-		InputStream is = process.getInputStream();
-				
-		String teste = "ls\n";
-				
-		os.write(teste.getBytes());
-		os.flush();
-				
-		//byte[] buf = new byte[1024];
-		//int n = is.read(buf);
-		//System.out.print(new String(buf, 0, n));
-				
-
-		//int result = process.waitFor();
-				
+		os = process.getOutputStream();
+		is = process.getInputStream();
+	
+	}
+	
+	public InputStream getIS(){
+		return is;
+	}
+	
+	public OutputStream getOS(){
+		return os;
 	}
 	
 }
