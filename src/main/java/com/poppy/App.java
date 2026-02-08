@@ -16,7 +16,6 @@ public class App {
 			
 			new Thread(in).start();
 			new Thread(out).start();
-			new Thread(ui).start();
 			
 		} catch(IOException e){
 			System.out.println("Hello poppy!");

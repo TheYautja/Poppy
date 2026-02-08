@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
+
 public class Ui extends Application implements Runnable {
 	
 	private Stage stage;
@@ -27,13 +28,14 @@ public class Ui extends Application implements Runnable {
 	public void start(Stage stage) throws Exception {
 		
 		
-		Text test = new Text("ui test");
+		Text test = new Text("Hello poppy window!");
+		test.setFill(Color.WHITE);
 		
 		HBox parent = new HBox();
 		
 		parent.getChildren().addAll(test);
 		
-		Scene scene = new Scene(parent, 100, 100, Color.LIGHTGRAY);
+		Scene scene = new Scene(parent, 400, 400, Color.BLACK);
 		stage.setTitle("Poppy");
 		stage.setScene(scene);
 		stage.show();
