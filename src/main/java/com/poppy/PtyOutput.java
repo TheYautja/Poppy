@@ -14,11 +14,12 @@ class PtyOutput implements Runnable {
 	
 	public void run(){
 		try {
-			
-			String test = "ls\n";
-			os.write(test.getBytes());
-			os.flush();
-			System.out.println("and this is the writer :D");
+			while(!Thread.currentThread().isInterrupted()){
+				String test = "ls\n";
+				os.write(test.getBytes());
+				os.flush();
+				System.out.println("and this is the writer :D");
+			}
 		
 		} catch(IOException e){
 			System.out.println("\u001B[34m" + "Pty Output stream error :(" + "\u001B[0m");
