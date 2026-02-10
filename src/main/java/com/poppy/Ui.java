@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
 import javafx.concurrent.Task;
 import java.io.IOException;
+import javafx.scene.image.Image;
 
 
 public class Ui extends Application {
@@ -24,14 +25,12 @@ public class Ui extends Application {
 		PTY pty = new PTY();
 		
 		TextArea terminal = new TextArea(helloMessage);
-		terminal.setStyle("-fx-control-inner-background: black; -fx-font-family: monospace; -fx-highlight-fill: gray; -fx-highlight-text-fill: black; -fx-text-fill: white;");
+		//terminal.setStyle("-fx-control-inner-background: black; -fx-font-family: monospace; -fx-highlight-fill: gray; -fx-highlight-text-fill: black; -fx-text-fill: white;");
 		terminal.setWrapText(true);
 		terminal.setEditable(true);
 		
 		PtyInput inStream = new PtyInput(pty.getIS(), terminal);
 		PtyOutput outStream = new PtyOutput(pty.getOS(), terminal);
-		
-		
 		
 		new Thread(inStream, "pty-input").start();
 		new Thread(outStream, "pty-output").start();
@@ -40,9 +39,10 @@ public class Ui extends Application {
 		
 		parent.getChildren().addAll(terminal);
 		
-		Scene scene = new Scene(parent, 400, 400, Color.BLACK);
+		Scene scene = new Scene(parent, 800, 400, Color.BLACK);
 		stage.setTitle("Poppy");
 		stage.setScene(scene);
+		stage.getIcons().add(new Image("images/minePoppy.png"));
 		stage.show();
 		
 	}
