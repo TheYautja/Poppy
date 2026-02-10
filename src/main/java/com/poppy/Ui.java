@@ -11,24 +11,16 @@ import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 
-public class Ui extends Application implements Runnable {
+public class Ui extends Application {
 	
 	private Stage stage;
-	
-	public void run(){
-		try{
-			start(stage);
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
+
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		
 		
-		Text test = new Text("Hello poppy window!");
+		Text test = new Text("hello poppy!");
 		test.setFill(Color.WHITE);
 		
 		HBox parent = new HBox();

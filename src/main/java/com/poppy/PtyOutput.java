@@ -2,9 +2,10 @@
 package com.poppy;
 
 import java.io.OutputStream;
-import java.io.IOException;
+import java.lang.Exception;
+import javafx.concurrent.Task;
 
-class PtyOutput implements Runnable {
+class PtyOutput extends Task<OutputStream>{
 	
 	OutputStream os;
 	
@@ -12,20 +13,14 @@ class PtyOutput implements Runnable {
 		this.os = os;
 	}
 	
-	public void run(){
-		try {
-			while(!Thread.currentThread().isInterrupted()){
-				String test = "ls\n";
-				os.write(test.getBytes());
-				os.flush();
-				System.out.println("and this is the writer :D");
-			}
-		
-		} catch(IOException e){
+	@Override
+	protected OutputStream call() throws Exception {
+		while(!Thread.currentThread().isInterrupted()){
+			String test = "echo Out thread\n";
+			os.write(test.getBytes());
+			os.flush();
 			System.out.println("\u001B[34m" + "Pty Output stream error :(" + "\u001B[0m");
-			e.printStackTrace();
 		}
-
+		return os;
 	}
-	
 }
