@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Ui extends Application {
 	
 	private Stage stage;
-	private String helloMessage = new String("Welcome to poppy!");
+	private String helloMessage = new String("Welcome to poppy!\n");
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -29,16 +29,9 @@ public class Ui extends Application {
 		terminal.setEditable(true);
 		
 		PtyInput inStream = new PtyInput(pty.getIS(), terminal);
-		PtyOutput outStream = new PtyOutput(pty.getOS());
+		PtyOutput outStream = new PtyOutput(pty.getOS(), terminal);
 		
-		terminal.setOnKeyTyped(e -> {
-			try{
-				pty.getOS().write(e.getCharacter().getBytes());
-				pty.getOS().flush();
-			}catch(IOException err){
-				err.printStackTrace();
-			}
-		});
+		
 		
 		new Thread(inStream, "pty-input").start();
 		new Thread(outStream, "pty-output").start();
