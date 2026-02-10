@@ -5,13 +5,17 @@ import java.io.InputStream;
 import java.lang.Exception;
 import java.io.IOException;
 import javafx.concurrent.Task;
+import javafx.scene.control.TextArea;
+import javafx.application.Platform;
 
 class PtyInput extends Task<Void> {
 	
 	InputStream is;
+	TextArea terminal;
 	
-	public PtyInput(InputStream is){
+	public PtyInput(InputStream is, TextArea terminal){
 		this.is = is;
+		this.terminal = terminal;
 	}
 	
 	
@@ -27,10 +31,12 @@ class PtyInput extends Task<Void> {
 				int n = is.read(buffer);
 				if(n == -1)break;
 				String res = new String(buffer, 0, n);
-				System.out.print(res);
+				
+				Platform.runLater(() -> terminal.appendText(res));
+				
 			}
 		}catch(IOException e){
-			System.out.println("\u001B[34m" + "Pty Input stream error :(" + "\u001B[0m");
+			System.out.println("\u001B[34m" + "Pty Input stream IOException :(" + "\u001B[0m");
 			e.printStackTrace();
 		}
 		return null;

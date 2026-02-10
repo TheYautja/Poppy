@@ -15,12 +15,10 @@ class PtyOutput extends Task<Void>{
 	
 	@Override
 	protected Void call() throws Exception {
-		while(!isCancelled()){
-			String test = "echo Out thread\n";
-			os.write(test.getBytes());
-			os.flush();
-			System.out.println("\u001B[34m" + "Pty Output stream error :(" + "\u001B[0m");
-		}
+
 		return null;
 	}
+	
+	
+	
 }
