@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
 import javafx.concurrent.Task;
+import java.io.IOException;
 
 
 public class Ui extends Application {
@@ -25,10 +26,19 @@ public class Ui extends Application {
 		TextArea terminal = new TextArea(helloMessage);
 		terminal.setStyle("-fx-control-inner-background: black; -fx-font-family: monospace; -fx-highlight-fill: gray; -fx-highlight-text-fill: black; -fx-text-fill: white;");
 		terminal.setWrapText(true);
-		terminal.setEditable(false);
+		terminal.setEditable(true);
 		
 		PtyInput inStream = new PtyInput(pty.getIS(), terminal);
 		PtyOutput outStream = new PtyOutput(pty.getOS());
+		
+		terminal.setOnKeyTyped(e -> {
+			try{
+				pty.getOS().write(e.getCharacter().getBytes());
+				pty.getOS().flush();
+			}catch(IOException err){
+				err.printStackTrace();
+			}
+		});
 		
 		new Thread(inStream, "pty-input").start();
 		new Thread(outStream, "pty-output").start();
