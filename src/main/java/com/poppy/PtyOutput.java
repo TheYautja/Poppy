@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.lang.Exception;
 import javafx.concurrent.Task;
 
-class PtyOutput extends Task<OutputStream>{
+class PtyOutput extends Task<Void>{
 	
 	OutputStream os;
 	
@@ -14,13 +14,13 @@ class PtyOutput extends Task<OutputStream>{
 	}
 	
 	@Override
-	protected OutputStream call() throws Exception {
-		while(!Thread.currentThread().isInterrupted()){
+	protected Void call() throws Exception {
+		while(!isCancelled()){
 			String test = "echo Out thread\n";
 			os.write(test.getBytes());
 			os.flush();
 			System.out.println("\u001B[34m" + "Pty Output stream error :(" + "\u001B[0m");
 		}
-		return os;
+		return null;
 	}
 }

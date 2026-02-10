@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import javafx.concurrent.Task;
 
 
 public class Ui extends Application {
@@ -19,6 +20,13 @@ public class Ui extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		
+		PTY pty = new PTY();
+		
+		PtyInput inStream = new PtyInput(pty.getIS());
+		PtyOutput outStream = new PtyOutput(pty.getOS());
+		
+		new Thread(inStream, "pty-input").start();
+		new Thread(outStream, "pty-output").start();
 		
 		Text test = new Text("hello poppy!");
 		test.setFill(Color.WHITE);
