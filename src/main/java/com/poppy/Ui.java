@@ -25,9 +25,9 @@ public class Ui extends Application {
 		PTY pty = new PTY();
 		
 		TextArea terminal = new TextArea(helloMessage);
-		//terminal.setStyle("-fx-control-inner-background: black; -fx-font-family: monospace; -fx-highlight-fill: gray; -fx-highlight-text-fill: black; -fx-text-fill: white;");
+		terminal.setStyle("-fx-control-inner-background: black; -fx-font-family: monospace; -fx-highlight-fill: gray; -fx-highlight-text-fill: black; -fx-text-fill: white;");
 		terminal.setWrapText(true);
-		terminal.setEditable(true);
+		terminal.setEditable(false);
 		
 		PtyInput inStream = new PtyInput(pty.getIS(), terminal);
 		PtyOutput outStream = new PtyOutput(pty.getOS(), terminal);

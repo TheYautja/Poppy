@@ -23,11 +23,14 @@ class PtyOutput extends Task<Void>{
 		return null;
 	}
 	
-	//pass every char to a varible possibly prevents double display
+	
 	private void write(){
 		terminal.setOnKeyTyped(e -> {
 			try{
-				os.write(e.getCharacter().getBytes());
+				
+				String input = e.getCharacter();
+				e.consume();
+				os.write(input.getBytes());
 				os.flush();
 			}catch(IOException err){
 				err.printStackTrace();
