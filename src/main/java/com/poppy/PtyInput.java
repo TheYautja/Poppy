@@ -1,12 +1,15 @@
 
 package com.poppy;
 
+
 import java.io.InputStream;
 import java.lang.Exception;
 import java.io.IOException;
+
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.application.Platform;
+
 
 class PtyInput extends Task<Void> {
 	
@@ -41,4 +44,9 @@ class PtyInput extends Task<Void> {
 		}
 		return null;
 	}
+	
+	
 }
+
+
+

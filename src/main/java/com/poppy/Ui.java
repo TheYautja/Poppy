@@ -14,10 +14,14 @@ import java.io.IOException;
 import javafx.scene.image.Image;
 
 
+
 public class Ui extends Application {
 	
 	private Stage stage;
+	private TextArea terminal;
 	private String helloMessage = new String("Welcome to poppy!\n");
+	private double wWidth = 800;
+	private double wHeight = 600;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -25,9 +29,10 @@ public class Ui extends Application {
 		PTY pty = new PTY();
 		
 		TextArea terminal = new TextArea(helloMessage);
-		terminal.setStyle("-fx-control-inner-background: black; -fx-font-family: monospace; -fx-highlight-fill: gray; -fx-highlight-text-fill: black; -fx-text-fill: white;");
+		terminal.setStyle("-fx-control-inner-background: black; -fx-font-family: monospace; -fx-highlight-fill: white; -fx-highlight-text-fill: black; -fx-text-fill: white;");
 		terminal.setWrapText(true);
 		terminal.setEditable(false);
+		terminal.setPrefWidth(wWidth);
 		
 		PtyInput inStream = new PtyInput(pty.getIS(), terminal);
 		PtyOutput outStream = new PtyOutput(pty.getOS(), terminal);
@@ -39,12 +44,15 @@ public class Ui extends Application {
 		
 		parent.getChildren().addAll(terminal);
 		
-		Scene scene = new Scene(parent, 800, 400, Color.BLACK);
+		Scene scene = new Scene(parent, wWidth, wHeight, Color.BLACK);
 		stage.setTitle("Poppy");
 		stage.setScene(scene);
 		stage.getIcons().add(new Image("images/minePoppy.png"));
 		stage.show();
 		
 	}
+	
+	
+	
 	
 }
