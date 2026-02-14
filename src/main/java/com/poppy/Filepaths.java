@@ -2,12 +2,9 @@
 package com.poppy;
 
 
-import java.io.File;
-
-
 class Filepaths {
 	
-	String currentPath = "/home/";
+	String currentPath = "/";
 	
 	public Filepaths(){
 		getUserDir();
