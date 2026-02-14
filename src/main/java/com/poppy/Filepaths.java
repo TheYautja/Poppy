@@ -4,18 +4,15 @@ package com.poppy;
 
 class Filepaths {
 	
-	String currentPath = "/";
+	String currentPath;
 	
 	public Filepaths(){
-		getUserDir();
+
 	}
 	
-	private void getUserDir(){
-		currentPath = System.getProperty("user.dir");
+	public String getUserDir(){
+		this.currentPath = System.getProperty("user.dir");
+		return this.currentPath;
 	}
-	
-	public String getCurrentPath(){
-		return currentPath;
-	}
-	
+
 }

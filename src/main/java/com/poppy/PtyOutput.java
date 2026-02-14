@@ -6,8 +6,6 @@ import java.io.OutputStream;
 import java.lang.Exception;
 import java.io.IOException;
 
-
-
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 
@@ -16,7 +14,6 @@ class PtyOutput extends Task<Void>{
 	
 	private OutputStream os;
 	private TextArea terminal;
-	private Filepaths fp = new Filepaths();
 	
 	public PtyOutput(OutputStream os, TextArea terminal) {
 		this.os = os;
@@ -41,15 +38,5 @@ class PtyOutput extends Task<Void>{
 			}
 		});
 	}
-	
-	
-	private byte[] getFilepathByteArray(){
-		byte[] filepath = new byte[4096]; 
-		
-		
-		
-		return filepath;
-	}
-	
 	
 }

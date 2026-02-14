@@ -39,7 +39,6 @@ class PtyInput extends Task<Void> {
 				
 			}
 		}catch(IOException e){
-			System.out.println("\u001B[34m" + "Pty Input stream IOException :(" + "\u001B[0m");
 			e.printStackTrace();
 		}
 		return null;

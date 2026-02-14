@@ -14,6 +14,7 @@ import java.io.IOException;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Window;
 
 
 
@@ -35,7 +36,7 @@ public class Ui extends Application {
 		terminal.setWrapText(true);
 		terminal.setEditable(false);
 		terminal.setPrefWidth(wWidth);
-		terminal.appendText("Running from: " + fp.getCurrentPath() + "\n" + "\n");
+		terminal.appendText("Running from: " + fp.getUserDir() + "\n");
 		
 		PtyInput inStream = new PtyInput(pty.getIS(), terminal);
 		PtyOutput outStream = new PtyOutput(pty.getOS(), terminal);
@@ -43,11 +44,14 @@ public class Ui extends Application {
 		new Thread(inStream, "pty-input").start();
 		new Thread(outStream, "pty-output").start();
 		
-		terminal.setOnKeyPressed(e -> {
+		/* terminal.setOnKeyPressed(e -> {
+			String path = fp.getUserDir();
+			System.out.println(path);
 			if(e.getCode() == KeyCode.ENTER){
-				terminal.appendText("\n--Ran from: " + fp.getCurrentPath());
+				terminal.appendText("\n--Ran from: " + path); //
 			}
-		});
+		}); */
+		// System.getProperty("user.dir"); returns where the class files are located.
 		
 		HBox parent = new HBox();
 		
@@ -59,6 +63,11 @@ public class Ui extends Application {
 		stage.getIcons().add(new Image("images/minePoppy.png"));
 		stage.setResizable(false);
 		stage.show();
+		
+		stage.setOnCloseRequest(e -> {
+			System.out.println("exiting poppy...");
+			System.exit(0);
+		});
 		
 	}
 
